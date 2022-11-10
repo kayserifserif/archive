@@ -1,7 +1,6 @@
 const MONTHS = "January February March April May June July August September October November December".split(" ");
 
-const ARCHIVE_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRg5FVCk83wl4ScdDo3IM_M698aBuvtz9jgN40ceD_Ey8-jqOxsuNp9swUjnovb03TrzzD6OFdlUF5Y/pub?output=tsv";
+const ARCHIVE_FILE = "archive.tsv"
 
 const yearTemp = document.querySelector(".year");
 yearTemp.remove();
@@ -9,7 +8,7 @@ const projectTemp = document.querySelector(".project");
 projectTemp.remove();
 
 const projects = {};
-fetch(ARCHIVE_URL)
+fetch(ARCHIVE_FILE)
   .then(r => r.text())
   .then(text => {
     const allLines = text.split("\r\n");
