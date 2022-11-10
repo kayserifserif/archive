@@ -1,0 +1,126 @@
+:root {
+  --sideW: 50%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "DIN Alternate", sans-serif;
+}
+
+body {
+  background-color: rgb(242, 242, 242);
+  padding: 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: blue;
+}
+
+abbr {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+dd {
+  margin: 0;
+}
+
+/* UTILITY */
+
+.hidden {
+  display: none !important;
+}
+
+/* STRUCTURE */
+
+main {
+  display: flex;
+  gap: 2em;
+  height: 100%;
+}
+
+/* PROJECTS */
+
+.category {
+  display: grid;
+  grid-template-rows: 100px 1fr;
+}
+
+.project-list {
+  margin: 0;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  gap: 1em;
+  flex: 1;
+}
+
+.project {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  width: 260px;
+}
+
+.project--title {
+  margin: 0;
+  font-weight: 400;
+}
+
+.project--body {
+  display: grid;
+  grid-template-rows: 1fr 200px;
+  gap: 1em;
+}
+
+.project--desc {
+  margin-bottom: 0.5em;
+}
+
+.project--links .metadata-list {
+  flex-direction: column;
+}
+
+.project--metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  font-size: 0.75em;
+}
+
+.metadata {
+  display: grid;
+  grid-template-columns: 1fr 65%;
+  gap: 1em;
+}
+
+.metadata-list {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5em;
+}
