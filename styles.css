@@ -1,5 +1,6 @@
 :root {
   --sideW: 50%;
+  --bg: rgb(242, 242, 242);
 }
 
 *,
@@ -17,7 +18,7 @@ body {
 }
 
 body {
-  background-color: rgb(242, 242, 242);
+  background-color: var(--bg);
   padding: 50px;
 }
 
@@ -65,9 +66,13 @@ main {
 
 /* PROJECTS */
 
-.category {
+.year {
   display: grid;
   grid-template-rows: 100px 1fr;
+}
+
+.year--heading {
+  padding: 0 20px;
 }
 
 .project-list {
@@ -81,23 +86,33 @@ main {
 
 .project {
   display: grid;
-  grid-template-rows: 50px 1fr;
-  width: 260px;
+  grid-template-rows: 15% 25% 25% 1fr;
+  width: 270px;
+  padding: 20px;
+}
+
+.project.status--in-progress {
+  background-color: var(--bg);
+  background-image: linear-gradient(
+     -45deg, 
+     rgba(0,0,0,0.05) 25%, 
+     transparent 25%, 
+     transparent 50%, 
+     rgba(0,0,0,0.05) 50%, 
+     rgba(0,0,0,0.05) 75%, 
+     transparent 75%, 
+     transparent
+     );
+  background-size: 5px 5px;
+  /* background-color: #e5e5f7; */
+  /* opacity: 0.8; */
+  /* background: repeating-linear-gradient( -45deg, #444cf7, #444cf7 5px, #e5e5f7 5px, #e5e5f7 25px ); */
+  /* background: repeating-linear-gradient( -45deg, #e9e9e9, #e9e9e9 5px, transparent 5px, transparent 25px ); */
 }
 
 .project--title {
   margin: 0;
   font-weight: 400;
-}
-
-.project--body {
-  display: grid;
-  grid-template-rows: 1fr 200px;
-  gap: 1em;
-}
-
-.project--desc {
-  margin-bottom: 0.5em;
 }
 
 .project--links .metadata-list {
@@ -107,8 +122,15 @@ main {
 .project--metadata {
   display: flex;
   flex-direction: column;
-  gap: 0.25em;
+  gap: 1em;
   font-size: 0.75em;
+}
+
+/* .project--metadata { */
+.metadata--category {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
 }
 
 .metadata {

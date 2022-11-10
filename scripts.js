@@ -3,10 +3,12 @@ const MONTHS = "January February March April May June July August September Octo
 const ARCHIVE_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRg5FVCk83wl4ScdDo3IM_M698aBuvtz9jgN40ceD_Ey8-jqOxsuNp9swUjnovb03TrzzD6OFdlUF5Y/pub?output=tsv";
 
+const yearTemp = document.querySelector(".year");
+yearTemp.remove();
 const projectTemp = document.querySelector(".project");
 projectTemp.remove();
 
-const projects = [];
+const projects = {};
 fetch(ARCHIVE_URL)
   .then(r => r.text())
   .then(text => {
@@ -22,19 +24,37 @@ fetch(ARCHIVE_URL)
         entry[header[i]] = cols[i];
       }
       if (entry["Portfolio"]) {
-        projects.push(entry);
+        const year = parseInt(entry["Month"].split(" ")[1]);
+        if (year in projects) {
+          projects[year].push(entry);
+        } else {
+          projects[year] = [entry];
+        }
       }
     }
-    
-    projects.forEach(project => {
-      const projectItem = projectTemp.cloneNode(true);
 
-      const containerName = project["Portfolio"].replace(/ /g, "-");
-      if (project["Portfolio"] === "work in progress") {
-        projectItem.classList.add("small");
-      }
-      const container = document.querySelector(`.${containerName} .project-list`);
-      container.appendChild(projectItem);
+    populate(projects);
+
+  });
+
+function populate(projects) {
+  const years = Object.keys(projects);
+  years.sort((a, b) => b - a);
+
+  for (let year of years) {
+    projects[year].sort((a, b) => {
+      const monthA = parseInt(a["Month"].split(" ")[0]);
+      const monthB = parseInt(b["Month"].split(" ")[0]);
+      return monthB - monthA;
+    });
+
+    const yearContainer = yearTemp.cloneNode(true);
+    yearContainer.querySelector(".year--heading").innerText = year;
+    document.querySelector("main").appendChild(yearContainer);
+
+    projects[year].forEach(project => {
+      const projectItem = projectTemp.cloneNode(true);
+      yearContainer.querySelector(".project-list").appendChild(projectItem);
 
       // title
       projectItem.querySelector(".project--title").innerHTML = strToHtml(project["Title"]);
@@ -74,6 +94,13 @@ fetch(ARCHIVE_URL)
       const [month, year] = project["Month"].split(" ").map(n => parseInt(n));
       const monthStr = MONTHS[month - 1];
       projectItem.querySelector(".project--date dd").innerText = `${monthStr} ${year}`;
+
+      // category
+      projectItem.querySelector(".project--category dd").innerText = project["Context"];
+      
+      // status
+      projectItem.querySelector(".project--status dd").innerText = project["Status"];
+      projectItem.classList.add(`status--${project["Status"].toLowerCase().replace(/ /g, "-")}`);
 
       // material
       projectItem.querySelector(".project--material dd").innerText = project["Material"];
@@ -131,8 +158,9 @@ fetch(ARCHIVE_URL)
       if (!project["Collaborators"]) {
         projectItem.querySelector(".project--collaborators").classList.add("hidden");
       }
-    });
-  });
+    })
+  }
+}
 
 function strToHtml(str) {
   const words = str.split(" ");
