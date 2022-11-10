@@ -72,15 +72,15 @@ function populate(projects) {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = link;
-        if (link.includes("twitter")) {
+        if (link.includes("twitter.com")) {
           a.innerText = "Twitter";
-        } else if (link.includes("github")) {
+        } else if (link.includes("github.com")) {
           a.innerText = "GitHub";
-        } else if (link.includes("youtu.be") || link.includes("youtube")) {
+        } else if (link.includes("youtu.be") || link.includes("youtube.com")) {
           a.innerText = "YouTube";
-        } else if (link.includes("instagram")) {
+        } else if (link.includes("instagram.com")) {
           a.innerText = "Instagram";
-        } else if (link.includes("Vimeo")) {
+        } else if (link.includes("vimeo.com")) {
           a.innerText = "Vimeo";
         } else {
           a.innerText = "Link";

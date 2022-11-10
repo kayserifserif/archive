@@ -14,7 +14,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "DIN Alternate", sans-serif;
+  font-family: "Palatino", serif;
 }
 
 body {
@@ -37,13 +37,18 @@ p {
 }
 
 a {
-  color: blue;
+  /* color: blue; */
+  color: #000;
+}
+
+a:hover {
+  font-style: italic;
 }
 
 abbr {
   text-transform: lowercase;
   font-variant: small-caps;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 dd {
@@ -87,7 +92,7 @@ main {
 .project {
   display: grid;
   grid-template-rows: 15% 25% 25% 1fr;
-  width: 270px;
+  width: 280px;
   padding: 20px;
 }
 
@@ -110,11 +115,6 @@ main {
   /* background: repeating-linear-gradient( -45deg, #e9e9e9, #e9e9e9 5px, transparent 5px, transparent 25px ); */
 }
 
-.project--title {
-  margin: 0;
-  font-weight: 400;
-}
-
 .project--links .metadata-list {
   flex-direction: column;
 }
@@ -124,6 +124,7 @@ main {
   flex-direction: column;
   gap: 1em;
   font-size: 0.75em;
+  /* font-family: "DIN Alternate", sans-serif; */
 }
 
 /* .project--metadata { */
@@ -135,7 +136,7 @@ main {
 
 .metadata {
   display: grid;
-  grid-template-columns: 1fr 65%;
+  grid-template-columns: 1fr 63%;
   gap: 1em;
 }
 
