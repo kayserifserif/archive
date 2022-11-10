@@ -66,6 +66,7 @@ dd {
 main {
   display: flex;
   gap: 2em;
+  /* flex: 1; */
   height: 100%;
 }
 
@@ -73,7 +74,7 @@ main {
 
 .year {
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 10% 1fr;
 }
 
 .year--heading {
@@ -91,7 +92,7 @@ main {
 
 .project {
   display: grid;
-  grid-template-rows: 15% 25% 25% 1fr;
+  grid-template-rows: 1fr 10em 1fr 16em;
   width: 280px;
   padding: 20px;
 }
@@ -117,6 +118,11 @@ main {
 
 .project--links .metadata-list {
   flex-direction: column;
+  gap: 0.2em;
+}
+
+.project--links a {
+  color: #555;
 }
 
 .project--metadata {
@@ -124,6 +130,7 @@ main {
   flex-direction: column;
   gap: 1em;
   font-size: 0.75em;
+  color: #444;
   /* font-family: "DIN Alternate", sans-serif; */
 }
 

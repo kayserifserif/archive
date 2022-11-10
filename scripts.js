@@ -1,4 +1,7 @@
 const MONTHS = "January February March April May June July August September October November December".split(" ");
+const BYTE_SIZES = {"KB": 1000, "MB": 1000000, "GB": 1000000000};
+const LIGHTEST_COLOR = 150;
+const DARKEST_COLOR = 0;
 
 const ARCHIVE_FILE = "archive.tsv"
 
@@ -6,6 +9,9 @@ const yearTemp = document.querySelector(".year");
 yearTemp.remove();
 const projectTemp = document.querySelector(".project");
 projectTemp.remove();
+
+let minBytes = Number.POSITIVE_INFINITY;
+let maxBytes = Number.NEGATIVE_INFINITY;
 
 const projects = {};
 fetch(ARCHIVE_FILE)
@@ -23,6 +29,13 @@ fetch(ARCHIVE_FILE)
         entry[header[i]] = cols[i];
       }
       if (entry["Portfolio"]) {
+        let [sizeNumber, sizeUnit] = entry["Size"].split(" ");
+        if (sizeUnit === "KB" || sizeUnit === "MB" || sizeUnit === "GB") {
+          sizeNumber = parseFloat(sizeNumber) * BYTE_SIZES[sizeUnit];
+          minBytes = Math.min(minBytes, sizeNumber);
+          maxBytes = Math.max(maxBytes, sizeNumber);
+        }
+
         const year = parseInt(entry["Month"].split(" ")[1]);
         if (year in projects) {
           projects[year].push(entry);
@@ -125,7 +138,16 @@ function populate(projects) {
       });
 
       // size
-      projectItem.querySelector(".project--size dd").innerText = project["Size"];
+      const size = project["Size"];
+      if (size) {
+        const [sizeNumber, sizeUnit] = project["Size"].split(" ");
+        const byteSize = parseFloat(sizeNumber) * BYTE_SIZES[sizeUnit];
+        const relativeSize = (byteSize - minBytes) / (maxBytes - minBytes);
+        const color = LIGHTEST_COLOR + relativeSize * (DARKEST_COLOR - LIGHTEST_COLOR);
+        projectItem.querySelector(".size--number").innerText = sizeNumber;
+        projectItem.querySelector(".size--unit").innerText = sizeUnit;
+        projectItem.querySelector(".project--size dd").style.color = `rgb(${color}, ${color}, ${color})`;
+      }
 
       // themes
       const themes = project["Themes"].split(", ");
