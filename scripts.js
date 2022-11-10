@@ -124,6 +124,9 @@ function populate(projects) {
         projectItem.querySelector(".project--extension .metadata-list").appendChild(li);
       });
 
+      // size
+      projectItem.querySelector(".project--size dd").innerText = project["Size"];
+
       // themes
       const themes = project["Themes"].split(", ");
       themes.sort((a, b) => a.localeCompare(b));
