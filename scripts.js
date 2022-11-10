@@ -107,8 +107,8 @@ function populate(projects) {
       const monthStr = MONTHS[month - 1];
       projectItem.querySelector(".project--date dd").innerText = `${monthStr} ${year}`;
 
-      // category
-      projectItem.querySelector(".project--category dd").innerText = project["Context"];
+      // context
+      projectItem.querySelector(".project--context dd").innerText = project["Context"];
       
       // status
       projectItem.querySelector(".project--status dd").innerText = project["Status"];
